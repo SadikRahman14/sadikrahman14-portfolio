@@ -1,32 +1,33 @@
 import React from "react";
 import RevealOnScroll from "../RevealOnScroll";
-
+import SectionHeading from "../SectionHeading";
+import DownloadCV from "../DownloadCV";
 
 const About = () => {
-    const frontendSkills = ["React", "TailwindCSS", "TypeScript"];
-    const backendSkills = ["NodeJS", "Python", "MySQL", "MongoDB"];
+
+    const aboutMe = "I’m a backend-focused software engineer who enjoys building reliable services and clear APIs with attention to performance, scalability, and observability. Most of my day-to-day work centers on designing data models, implementing business logic, and keeping latency predictable—using tools like Node.js, Python, MySQL, and MongoDB, with testing and reviews to keep changes safe. I regularly practice data structures and algorithms on LeetCode to stay sharp, which helps me reason about edge cases and complexity before they become production issues. Beyond shipping features, I’m exploring research at the intersection of reinforcement learning and AI for code quality—especially detecting code smells early and guiding safe, human-in-the-loop refactoring. I value small, well-scoped changes, clear documentation of trade-offs, and feedback loops that make incidents boring and improvements fast."
+
+    const frontendSkills = ["React", "TailwindCSS", "TypeScript", "NextJS"];
+    const backendSkills = ["NodeJS", "Python", "MySQL", "MongoDB", "Laravel"];
 
     return (
         <section
             id="about"
-            className="relative min-h-screen flex items-center justify-center py-20 overflow-hidden"
+            className="mt-10 relative min-h-screen flex items-center justify-center py-20 overflow-hidden"
         >
             <RevealOnScroll>
-                {/* soft background accents */}
                
                 <div className="pointer-events-none absolute -bottom-40 left-0 h-72 w-72 rounded-full bg-emerald-700/10 blur-3xl" />
 
                 <div className="max-w-5xl mx-auto px-4">
-                    <h2 className="text-center text-4xl font-bold mb-10 bg-gradient-to-r from-green-500 to-green-900 bg-clip-text text-transparent">
-                        About Me
-                    </h2>
+                    <SectionHeading>About Me</SectionHeading>
 
                     {/* Intro / Bio card */}
                     <div className="relative rounded-xl border border-white/10 bg-white/[0.02] p-8 backdrop-blur-sm hover:-translate-y-1 transition-all">
                         {/* top accent line */}
                         <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-emerald-500/50 to-transparent" />
-                        <p className="text-gray-300 leading-relaxed mb-6">
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe impedit quia iste harum, vel ipsam rem debitis error voluptate, recusandae dignissimos ratione tempore, quaerat aliquam quidem voluptas ipsa culpa odio.
+                        <p className="text-gray-300 leading-relaxed mb-6 align-middle">
+                            {aboutMe}
                         </p>
 
                         {/* Skills */}
@@ -125,6 +126,8 @@ const About = () => {
                             </ul>
                         </div>
                     </div>
+
+                    <DownloadCV />                                    
                 </div>
             </RevealOnScroll>
         </section>

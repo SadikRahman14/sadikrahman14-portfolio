@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react'
+import { FaHamburger } from "react-icons/fa";
 
 const NavBar = ({ menuOpen, setMenuOpen }) => {
 
@@ -18,32 +19,27 @@ const NavBar = ({ menuOpen, setMenuOpen }) => {
 
 
                     <div className='hidden md:flex items-center space-x-8 '>
-                        <a href="#home" className='text-gray-300 hover:text-white transition-colors'>
+                        <a href="#home" className='text-gray-300 hover:text-green-900 transition-colors'>
                             HOME
                         </a>
 
 
 
-                        <a href="#about" className='text-gray-300 hover:text-white transition-colors'>
+                        <a href="#about" className='text-gray-300  hover:text-green-900 transition-colors'>
                             ABOUT
                         </a>
 
-
-
-                        <a href="#projects" className='text-gray-300 hover:text-white transition-colors'>
+                        <a href="#projects" className='text-gray-300 hover:text-green-900 transition-colors'>
                             PROJECTS
                         </a>
 
-
-
-                        <a href="#contact" className='text-gray-300 hover:text-white transition-colors'>
+                        <a href="#contact" className='text-gray-300  hover:text-green-900 transition-colors'>
                             CONTACT
                         </a>
-
                     </div>
 
-                    <div className='w-7 h-5 relative cursor-pointer z-40 md:hidden' onClick={() => setMenuOpen((prev) => !prev)}>
-                        &#9776;
+                    <div className='text-green-500 w-7 h-5 relative cursor-pointer z-40 md:hidden' onClick={() => setMenuOpen((prev) => !prev)}>
+                        <FaHamburger />
                     </div>
                 </div>
 

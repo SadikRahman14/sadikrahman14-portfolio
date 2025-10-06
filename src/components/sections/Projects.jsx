@@ -1,6 +1,6 @@
 import React from "react";
 import RevealOnScroll from "../RevealOnScroll";
-
+import SectionHeading from "../SectionHeading";
 
 const PROJECTS = [
     {
@@ -8,28 +8,28 @@ const PROJECTS = [
         description:
             "Mobile health & donor coordination app with real-time requests, push notifications, and secure auth.",
         tech: ["Flutter", "Firebase", "Dart"],
-        href: "#",
+        href: "https://github.com/SadikRahman14/Shanjeeban",
     },
     {
         title: "Vien",
         description:
             "MERN e-commerce/admin dashboard with role-based access, product CRUD, charts, and server-side pagination.",
         tech: ["MongoDB", "Express.js", "React", "Node.js", "Tailwind CSS"],
-        href: "#",
+        href: "https://github.com/SadikRahman14/Vien",
     },
     {
         title: "Innovest",
         description:
             "Investment portfolio web app: watchlists, transactions, P/L analytics, and CSV import/export.",
         tech: ["MySQL", "Laravel", "React"],
-        href: "#",
+        href: "https://github.com/kazi-kamruddin/Innovest",
     },
     {
         title: "Beacon",
         description:
             "Internal incident & asset tracker with audit logs, email alerts, and fine-grained permissions.",
         tech: [".NET", "ASP.NET Core MVC", "C#"],
-        href: "#",
+        href: "https://github.com/SadikRahman14/Beacon",
     },
 ];
 
@@ -72,9 +72,7 @@ const Projects = () => {
         <section id='projects' className='min-h-screen flex items-center justify-center py-20'>
             <RevealOnScroll>
                 <div className='max-w-5xl mx-auto px-4'>
-                    <h2 className='text-center text-4xl font-bold mb-10 bg-gradient-to-r from-green-500 to-green-900 bg-clip-text text-transparent'>
-                        Featured Projects
-                    </h2>
+                    <SectionHeading>Featured Projects</SectionHeading>
 
                     <div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
                         {PROJECTS.map((p, idx) => (
