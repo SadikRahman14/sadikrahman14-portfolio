@@ -4,6 +4,8 @@ import emailjs from "emailjs-com"
 import { FaFacebook, FaGithub, FaXTwitter, FaLinkedin } from "react-icons/fa6";
 import { FiMail } from "react-icons/fi";
 import SectionHeading from '../SectionHeading';
+import { toast } from 'react-toastify';
+
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -30,16 +32,16 @@ const Contact = () => {
       import.meta.env.VITE_PUBLIC_KEY
     )
       .then(() => {
-        alert("Message Sent")
+        toast.success("Message Send Successfully")
         setFormData({ name: "", email: "", message: "" })
       })
-      .catch(() => alert("Oops! Something Went Wrong. Please Try Again"))
+      .catch(() => toast.error("Oops! Something Went Wrong. Please Try Again"))
   }
 
   return (
     <section
       id='contact'
-      className='min-h-screen flex items-center justify-center py-16 md:py-20'
+      className='mt-20 min-h-screen flex items-center justify-center py-16 md:py-20'
     >
       <RevealOnScroll>
         {/* mobile: full width; desktop: your original w-150 */}

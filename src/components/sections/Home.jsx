@@ -4,8 +4,8 @@ import RevealOnScroll from "../RevealOnScroll";
 
 const Home = () => {
     return (
-        <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden">
-            
+        <section id="home" className="mt-4 relative min-h-screen flex items-center justify-center overflow-hidden">
+
             <div
                 className="pointer-events-none absolute top-1/2 -translate-y-1/2 right-32
                    h-[32rem] w-[32rem] rounded-full bg-emerald-500/30 blur-3xl
@@ -61,21 +61,39 @@ const Home = () => {
                         </div>
                     </div>
 
-                    <div className="relative shrink-0 hidden md:block">
+                    <div className="relative shrink-0 hidden md:block group transform-gpu">
+                        {/* glow behind (appears on hover) */}
+                        <div className="absolute -inset-4 -z-10 rounded-3xl bg-emerald-500/10 opacity-0 blur-2xl transition-all duration-1000 group-hover:opacity-100 group-hover:blur-3xl" />
+
                         <img
                             src={me}
                             alt="Your portrait"
                             className="
-                w-[min(40vw,26rem)]
-                object-contain
-                [mask-image:linear-gradient(to_bottom,black_92%,transparent_100%)]
-                [-webkit-mask-image:linear-gradient(to_bottom,black_92%,transparent_100%)]
-              "
+                                w-[min(40vw,26rem)]
+                                object-contain
+                                transition-all duration-1000 ease-out transform-gpu
+                                grayscale-[25%] contrast-110
+                                group-hover:grayscale-0 group-hover:saturate-125
+                                group-hover:[transform:perspective(900px)_rotateY(-6deg)_rotateX(2deg)_scale(1.04)]
+                                [mask-image:linear-gradient(to_bottom,black_92%,transparent_100%)]
+                                [-webkit-mask-image:linear-gradient(to_bottom,black_92%,transparent_100%)]"
                         />
 
+
+                        <div className="pointer-events-none absolute inset-0 overflow-hidden">
+                            <span
+                                className="absolute top-0 left-[-150%] h-full w-1/3
+                                            bg-gradient-to-r from-transparent via-white/15 to-transparent
+                                            skew-x-12
+                                            transition-transform duration-700 ease-out
+                                            group-hover:translate-x-[300%]"
+                            />
+                        </div>
+
+                        {/* floor shadow (kept) */}
                         <div
                             className="pointer-events-none absolute -bottom-1 left-1/2 -translate-x-1/2
-                         w-[70%] h-7 rounded-full bg-black/35 blur-md opacity-60"
+               w-[70%] h-7 rounded-full bg-black/35 blur-md opacity-60"
                         />
                     </div>
                 </div>

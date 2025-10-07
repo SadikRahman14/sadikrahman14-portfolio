@@ -40,3 +40,41 @@ body {
   opacity: 1;
   transform: translateY(0);
 }
+
+/* index.css */
+
+/* 1) Brand colors (tweak these) */
+:root {
+  --sb-track: #010807;      /* track background (dark) */
+  --sb-thumb: #035c3e;      /* emerald thumb */
+  --sb-thumb-hover: #34d399;/* lighter emerald on hover */
+  --sb-border: #0a0f0e;     /* border to create a pill thumb */
+}
+
+/* 2) Firefox */
+html {
+  scrollbar-width: thin; /* auto | thin | none */
+  scrollbar-color: var(--sb-thumb) var(--sb-track);
+}
+
+/* 3) Chrome/Edge/Brave/Opera/Safari (WebKit/Blink) */
+/* Apply sitewide: use universal selector so nested scroll areas inherit */
+
+
+*::-webkit-scrollbar-track {
+  background: var(--sb-track);
+}
+
+*::-webkit-scrollbar-thumb {
+  background: linear-gradient(to bottom, #059669, #065f46);
+  border: 2px solid var(--sb-border);
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(to bottom, var(--sb-thumb), #047857);
+}
+
+
+@media (max-width: 768px) {
+  *::-webkit-scrollbar { width: 8px; height: 8px; }
+}

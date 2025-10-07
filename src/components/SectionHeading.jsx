@@ -12,7 +12,8 @@ const SectionHeading = ({ children, className = "" }) => {
                      "
         />
 
-        <h2 className="cursor-pointer text-center text-4xl font-bold bg-gradient-to-r from-green-500 to-green-800 bg-clip-text text-transparent">
+        <h2 className="cursor-pointer text-center text-4xl font-bold bg-gradient-to-r from-green-500 to-green-800 bg-clip-text text-transparent
+                      hover:bg-gradient-to-r hover:to-green-500 hover:from-green-800">
           {children}
         </h2>
 

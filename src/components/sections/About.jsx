@@ -13,18 +13,16 @@ const About = () => {
     return (
         <section
             id="about"
-            className="mt-10 relative min-h-screen flex items-center justify-center py-20 overflow-hidden"
+            className="mt-15 relative min-h-screen flex items-center justify-center py-20 overflow-hidden"
         >
             <RevealOnScroll>
-               
+
                 <div className="pointer-events-none absolute -bottom-40 left-0 h-72 w-72 rounded-full bg-emerald-700/10 blur-3xl" />
 
                 <div className="max-w-5xl mx-auto px-4">
                     <SectionHeading>About Me</SectionHeading>
 
-                    {/* Intro / Bio card */}
                     <div className="relative rounded-xl border border-white/10 bg-white/[0.02] p-8 backdrop-blur-sm hover:-translate-y-1 transition-all">
-                        {/* top accent line */}
                         <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-emerald-500/50 to-transparent" />
                         <p className="text-gray-300 leading-relaxed mb-6 align-middle">
                             {aboutMe}
@@ -64,9 +62,7 @@ const About = () => {
                         </div>
                     </div>
 
-                    {/* Education + Awards */}
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
-                        {/* Education */}
                         <div className="relative p-6 rounded-xl border border-white/10 bg-emerald-950/40 hover:-translate-y-1 transition-all">
                             <h3 className="text-2xl font-bold text-green-200 mb-4">Education</h3>
 
@@ -125,9 +121,110 @@ const About = () => {
                                 </li>
                             </ul>
                         </div>
-                    </div>
 
-                    <DownloadCV />                                    
+                        <div className="relative p-6 rounded-xl border border-white/10 bg-emerald-950/40 hover:-translate-y-1 transition-all">
+                            <h3 className="text-2xl font-bold text-green-200 mb-4"> Research Interest </h3>
+
+                            <ul className="space-y-5">
+                                <li className="relative pl-8">
+                                    <span className="absolute left-0 top-2 h-3 w-3 rounded-full bg-emerald-400 shadow-[0_0_0_4px_rgba(16,185,129,0.15)]" />
+                                    <strong className="text-white block">Reinforcement Learning</strong>
+                                    <p className="text-gray-300">
+                                        29-Card Game agent exploring bidding, trump selection, and trick-taking with partial information.
+                                        Self-play + policy gradients to learn play patterns beyond heuristics.
+                                    </p>
+
+                                    {/* tech chips */}
+                                    <div className="mt-2 flex flex-wrap gap-2">
+                                        <span className="text-xs rounded-full bg-emerald-700/30 text-emerald-200 px-2 py-1">Python</span>
+                                        <span className="text-xs rounded-full bg-emerald-700/30 text-emerald-200 px-2 py-1">PyTorch</span>
+                                        <span className="text-xs rounded-full bg-emerald-700/30 text-emerald-200 px-2 py-1">Self-play</span>
+                                        <span className="text-xs rounded-full bg-emerald-700/30 text-emerald-200 px-2 py-1">PPO/DQN (exp.)</span>
+                                    </div>
+
+                                    {/* optional link/status */}
+                                    <div className="mt-2 flex items-center gap-3">
+                                        <strong className="text-emerald-300">Status: Preparation </strong>
+                                        {/* <a href="#" className="text-emerald-300 hover:text-emerald-200">Repo ↗</a> */}
+                                    </div>
+                                </li>
+
+                                <li className="relative pl-8">
+                                    <span className="absolute left-0 top-2 h-3 w-3 rounded-full bg-emerald-400 shadow-[0_0_0_4px_rgba(16,185,129,0.15)]" />
+                                    <strong className="text-white block">AI in Code Smells</strong>
+                                    <p className="text-gray-300">
+                                        Experiments combining static analysis + embeddings to flag common smells (Long Method, God Class, Feature Envy),
+                                        with refactoring hints (Extract/Move Method) aimed at reviewer assist.
+                                    </p>
+
+
+                                    <div className="mt-2 flex flex-wrap gap-2">
+                                        <span className="text-xs rounded-full bg-emerald-700/30 text-emerald-200 px-2 py-1">AST / Tree-sitter</span>
+                                        <span className="text-xs rounded-full bg-emerald-700/30 text-emerald-200 px-2 py-1">Static Metrics</span>
+                                        <span className="text-xs rounded-full bg-emerald-700/30 text-emerald-200 px-2 py-1">Embeddings</span>
+                                        <span className="text-xs rounded-full bg-emerald-700/30 text-emerald-200 px-2 py-1">Refactor Hints</span>
+                                    </div>
+
+
+                                    <div className="mt-2 flex items-center gap-3">
+                                        <strong className="text-emerald-300">Status: Preparation</strong>
+                                        {/* <a href="#" className="text-emerald-300 hover:text-emerald-200">Notes ↗</a>  */}
+                                    </div>
+                                </li>
+                            </ul>
+
+
+
+                        </div>
+
+                        <div className="relative p-6 rounded-xl border border-white/10 bg-emerald-950/40 hover:-translate-y-1 transition-all shadow-lg shadow-emerald-900/20">
+                            <h3 className="text-2xl font-bold text-green-200 mb-4">Work Experience</h3>
+
+                            <ul className="space-y-6">
+                                {/* Item */}
+                                <li className="relative pl-8">
+                                    {/* timeline dot */}
+                                    <span className="absolute left-0 top-2 h-3 w-3 rounded-full bg-emerald-400 shadow-[0_0_0_4px_rgba(16,185,129,0.15)]" />
+
+                                    {/* heading */}
+                                    <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1">
+                                        <strong className="text-white block">
+                                            Backend Developer <span className="text-emerald-300/90">·</span> AUST Rah. Peace Club
+                                        </strong>
+                                        
+                                    </div>
+
+                                    {/* summary */}
+                                    <p className="mt-2 text-gray-300">
+                                        Building and maintaining backend services and APIs used by club initiatives and event platforms.
+                                        I focus on clean domain models, predictable performance, and instrumentation for quick debugging.
+                                    </p>
+
+                                    {/* impact bullets */}
+                                   
+
+                                    {/* tech chips */}
+                                    <div className="mt-3 flex flex-wrap gap-2">
+                                        <span className="text-xs rounded-full bg-emerald-700/30 text-emerald-200 px-2 py-1">Node.js</span>
+                                        <span className="text-xs rounded-full bg-emerald-700/30 text-emerald-200 px-2 py-1">Express</span>
+                                        <span className="text-xs rounded-full bg-emerald-700/30 text-emerald-200 px-2 py-1">Supabase</span>
+                                        <span className="text-xs rounded-full bg-emerald-700/30 text-emerald-200 px-2 py-1">JWT/Auth</span>
+                                        <span className="text-xs rounded-full bg-emerald-700/30 text-emerald-200 px-2 py-1">Redis (cache)</span>
+                                        <span className="text-xs rounded-full bg-emerald-700/30 text-emerald-200 px-2 py-1">GitHub Actions</span>
+                                    </div>
+
+                                    {/* status / links */}
+                                    <div className="mt-3 flex flex-wrap items-center gap-3">
+                                        <span className="inline-flex items-center rounded-full border border-emerald-500/30 bg-emerald-500/10 px-2.5 py-1 text-xs font-semibold text-emerald-200">
+                                            Sept. 2025 - Present
+                                        </span>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+
+                    </div>
+                    <DownloadCV />
                 </div>
             </RevealOnScroll>
         </section>
