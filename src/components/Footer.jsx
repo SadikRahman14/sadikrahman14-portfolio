@@ -1,6 +1,6 @@
 // src/components/Footer.jsx
 import React from "react";
-import { FaGithub, FaXTwitter, FaLinkedin } from "react-icons/fa6";
+import { FaGithub, FaXTwitter, FaLinkedin, FaFacebook } from "react-icons/fa6";
 import { FiMail } from "react-icons/fi";
 
 // Edit these without touching the design:
@@ -12,10 +12,11 @@ const NAV_LINKS = [
 ];
 
 const SOCIALS = [
-    { label: "GitHub", href: "https://github.com/your-username", Icon: FaGithub },
-    { label: "X", href: "https://x.com/your-handle", Icon: FaXTwitter },
-    { label: "LinkedIn", href: "https://linkedin.com/in/your-id", Icon: FaLinkedin },
-    { label: "Email", href: "mailto:you@example.com", Icon: FiMail },
+    { label: "GitHub", href: "https://github.com/SadikRahman14", Icon: FaGithub },
+    { label: "X", href: "https://x.com/SadikRa94780860", Icon: FaXTwitter },
+    { label: "LinkedIn", href: "https://www.linkedin.com/in/sadik-rahman-7b0658253/", Icon: FaLinkedin },
+    { label: "Email", href: "mailto:sadik.nai.008@gmail.com", Icon: FiMail },
+    { label: "Facebook", href: "https://www.facebook.com/SadikRahman14p/", Icon: FaFacebook },
 ];
 
 const Footer = () => {
@@ -72,20 +73,18 @@ const Footer = () => {
                 {/* Bottom row */}
                 <div className="mt-8 pt-6 border-t border-white/10 text-sm text-gray-400">
                     <div className="grid grid-cols-1 md:grid-cols-3 items-center gap-4">
-                        {/* left spacer for desktop */}
+
                         <div className="hidden md:block" />
 
-                        {/* centered name */}
                         <span className="justify-self-center">
-                            {new Date().getFullYear()} @SadikRahman14. All rights reserved.
+                            &copy; {new Date().getFullYear()} Sadik Rahman. All rights reserved.
                         </span>
 
-                        {/* right-aligned link */}
                         <a
                             href="#home"
                             className="justify-self-center md:justify-self-end inline-flex items-center gap-2 text-emerald-300 hover:text-emerald-200 transition"
                         >
-                            Back to top ↑
+                            Return to Top &uarr;
                         </a>
                     </div>
                 </div>

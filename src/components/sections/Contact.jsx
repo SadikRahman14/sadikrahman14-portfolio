@@ -93,21 +93,7 @@ const Contact = () => {
           </form>
 
           {/* Socials — desktop unchanged; mobile larger tap + wrap */}
-          <div className="mt-10 flex justify-center gap-3 flex-wrap">
-            {SOCIALS.map(({ label, href, Icon }) => (
-              <a
-                key={label}
-                href={href}
-                aria-label={label}
-                target="_blank"
-                rel="noreferrer"
-                className="inline-flex h-12 w-12 md:h-10 md:w-10 items-center justify-center rounded-full border border-white/10
-                           text-green-200/80 hover:text-green-200 hover:border-green-500/40 transition"
-              >
-                <Icon className="h-5 w-5" />
-              </a>
-            ))}
-          </div>
+          
         </div>
       </RevealOnScroll>
     </section>

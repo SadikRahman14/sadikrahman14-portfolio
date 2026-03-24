@@ -39,20 +39,7 @@ const NavBar = ({ menuOpen, setMenuOpen }) => {
                         </a>
                     </div>
 
-                    <div className="flex items-center gap-3">
-  {/* High-five: visible on mobile + desktop */}
-  <div className="block">
-    <HighFiveButton />
-  </div>
-
-  {/* Hamburger: only on mobile, appears AFTER high-five */}
-  <div
-    className='text-green-500 w-7 h-5 relative cursor-pointer z-40 md:hidden'
-    onClick={() => setMenuOpen((prev) => !prev)}
-  >
-    <FaHamburger />
-  </div>
-</div>
+                    
 
 
 

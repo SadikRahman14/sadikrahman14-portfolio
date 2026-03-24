@@ -4,7 +4,7 @@ import me from "../assets/me_bg_resize.png"
 const LoadingScreen = ({ onComplete }) => {
   const [text, setText] = useState("");
   const [isExiting, setIsExiting] = useState(false);
-  const fullText = "<SadikRahman... />";
+  const fullText = "<SadikRahman.../>";
 
   const timers = useRef([]);
 
@@ -17,7 +17,6 @@ const LoadingScreen = ({ onComplete }) => {
         index++;
 
         let delay = 100;
-        // keep your pause indexes exactly the same
         if (index === 13 || index === 14 || index === 15 || index === 16) {
           delay = 500;
         }
@@ -25,7 +24,6 @@ const LoadingScreen = ({ onComplete }) => {
         const id = setTimeout(typeNextChar, delay);
         timers.current.push(id);
       } else {
-        // gentle fade-out, then call onComplete at your same 1s mark
         setIsExiting(true);
         const id = setTimeout(() => onComplete(), 1000);
         timers.current.push(id);
@@ -35,7 +33,6 @@ const LoadingScreen = ({ onComplete }) => {
     typeNextChar();
 
     return () => {
-      // cleanup all pending timers
       timers.current.forEach(clearTimeout);
       timers.current = [];
     };
