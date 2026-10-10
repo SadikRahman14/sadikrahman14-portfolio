@@ -1,122 +1,203 @@
-// HighFiveButton.jsx
-import { useEffect, useState } from "react";
-import { FiThumbsUp } from "react-icons/fi";
+
+import { useEffect, useRef, useState } from "react";
 import { GiHighFive } from "react-icons/gi";
+import "../styles/high-five.css";
 
-const NAMESPACE = "sadikrahman14-portfolio";
-const KEY = "highfive";
-const API = "https://api.countapi.xyz";
+// Hosted counter — no API key required.
+const API_BASE = "https://abacus.jasoncameron.dev";
+const NAMESPACE = "sadikrahman14.github.io";
+const COUNTER_NAME = "portfolio-highfives";
 
-const LS_HAS = "sr_has_high_fived";
-const LS_COUNT = "sr_local_highfive_count";
+const LOCAL_KEY = "sr_highfive_abacus_v1";
 
-export default function HighFiveButton() {
-    const [count, setCount] = useState(null);
-    const [hasFived, setHasFived] = useState(false);
-    const [blocked, setBlocked] = useState(false);
-    const [pending, setPending] = useState(false);
+const GET_URL =
+  `${API_BASE}/get/${NAMESPACE}/${COUNTER_NAME}`;
 
-    useEffect(() => {
-        const localHas = localStorage.getItem(LS_HAS) === "1";
-        const localCount = parseInt(localStorage.getItem(LS_COUNT) || "0", 10);
-        setHasFived(localHas);
-        setCount(Number.isNaN(localCount) ? 0 : localCount);
+const HIT_URL =
+  `${API_BASE}/hit/${NAMESPACE}/${COUNTER_NAME}`;
 
-        // 2) try to get global count; if blocked, we keep local
-        (async () => {
-            try {
-                const r = await fetch(`${API}/get/${NAMESPACE}/${KEY}`, { cache: "no-store" });
-                if (!r.ok) throw new Error();
-                const d = await r.json();
-                setBlocked(false);
-                setCount(typeof d.value === "number" ? d.value : 0);
-            } catch {
-                setBlocked(true);
-            }
-        })();
-    }, []);
-
-const giveHighFive = async () => {
-  if (pending) return;
-
-  // ---- BLOCKED: keep a per-device counter in localStorage
-  if (blocked) {
-    const current = parseInt(localStorage.getItem(LS_COUNT) || "0", 10) || 0;
-
-    if (hasFived) {
-      // undo locally
-      const next = Math.max(0, current - 1);
-      localStorage.setItem(LS_COUNT, String(next));
-      localStorage.removeItem(LS_HAS);
-      setHasFived(false);
-      setCount(next);
-    } else {
-      // give locally
-      const next = current + 1;
-      localStorage.setItem(LS_COUNT, String(next));
-      localStorage.setItem(LS_HAS, "1");
-      setHasFived(true);
-      setCount(next);
-    }
-    return;
+function alreadyHighFived() {
+  try {
+    return window.localStorage.getItem(LOCAL_KEY) === "1";
+  } catch {
+    return false;
   }
+}
 
-  // ---- GLOBAL: use CountAPI
-  setPending(true);
+export default function HighFiveButton({ compact = false }) {
+  const [count, setCount] = useState(null);
+  const [hasFived, setHasFived] = useState(alreadyHighFived);
+  const [status, setStatus] = useState("loading");
+  const [pending, setPending] = useState(false);
+  const [message, setMessage] = useState("");
 
-  if (hasFived) {
-    // undo (decrement)
-    setHasFived(false);
-    setCount((c) => Math.max(0, (c ?? 1) - 1)); // optimistic
+  const requestInFlight = useRef(false);
+
+  // Read the global count when the component mounts.
+  useEffect(() => {
+    const controller = new AbortController();
+
+    async function loadCount() {
+      try {
+        const response = await fetch(GET_URL, {
+          cache: "no-store",
+          signal: controller.signal,
+        });
+
+        // New counters don't exist until the first hit.
+        if (response.status === 404) {
+          setCount(0);
+          setStatus("ready");
+          return;
+        }
+
+        if (!response.ok) {
+          throw new Error(`Counter HTTP ${response.status}`);
+        }
+
+        const data = await response.json();
+
+        if (
+          !Number.isSafeInteger(data.value) ||
+          data.value < 0
+        ) {
+          throw new Error("Invalid counter response");
+        }
+
+        setCount(data.value);
+        setStatus("ready");
+      } catch (error) {
+        if (controller.signal.aborted) return;
+
+        console.error(
+          "Couldn't load high five count:",
+          error
+        );
+
+        setStatus("error");
+        setMessage(
+          "The shared counter is unavailable right now."
+        );
+      }
+    }
+
+    loadCount();
+
+    return () => controller.abort();
+  }, []);
+
+  async function giveHighFive() {
+    if (
+      requestInFlight.current ||
+      hasFived ||
+      status !== "ready"
+    ) {
+      return;
+    }
+
+    // Check again in case another tab already clicked.
+    if (alreadyHighFived()) {
+      setHasFived(true);
+      return;
+    }
+
+    requestInFlight.current = true;
+    setPending(true);
+    setMessage("");
 
     try {
-      const r = await fetch(`${API}/update/${NAMESPACE}/${KEY}?amount=-1`, { cache: "no-store" });
-      const d = await r.json();
-      if (typeof d.value === "number") setCount(Math.max(0, d.value));
-      localStorage.removeItem(LS_HAS);
-    } catch {
-      setHasFived(true);
-      setCount((c) => (c ?? 0) + 1);
-    } finally {
-      setPending(false);
-    }
-  } else {
-    setHasFived(true);
-    setCount((c) => (c ?? 0) + 1); 
+      const response = await fetch(HIT_URL, {
+        cache: "no-store",
+      });
 
-    try {
-      const r = await fetch(`${API}/hit/${NAMESPACE}/${KEY}`, { cache: "no-store" });
-      const d = await r.json();
-      if (typeof d.value === "number") setCount(d.value);
-      localStorage.setItem(LS_HAS, "1");
-    } catch {
-      setHasFived(false);
-      setCount((c) => Math.max(0, (c ?? 1) - 1));
+      if (!response.ok) {
+        throw new Error(
+          `Counter HTTP ${response.status}`
+        );
+      }
+
+      const data = await response.json();
+
+      if (
+        !Number.isSafeInteger(data.value) ||
+        data.value < 1
+      ) {
+        throw new Error("Invalid counter response");
+      }
+
+      // Remember this browser's high five.
+      try {
+        window.localStorage.setItem(LOCAL_KEY, "1");
+      } catch {
+        // The shared count still works without storage.
+      }
+
+      setCount(data.value);
+      setHasFived(true);
+      setMessage("High five received. Thank you!");
+    } catch (error) {
+      console.error(
+        "Couldn't give high five:",
+        error
+      );
+
+      setStatus("error");
+      setMessage(
+        "Couldn't confirm the high five. Refresh to check again."
+      );
     } finally {
+      requestInFlight.current = false;
       setPending(false);
     }
   }
-};
 
+  const disabled =
+    hasFived || pending || status !== "ready";
 
-    const label =
-        count == null ? "…" : `${count.toLocaleString()}`;
+  const displayedCount =
+    count === null ? "—" : count.toLocaleString();
 
+  
+  // Compact version for the navbar
+  if (compact) {
     return (
-        <div className="flex items-center gap-3">
-            <button
-                onClick={giveHighFive}
-                disabled={pending}
-                className={`inline-flex items-center gap-2 rounded-lg px-4 py-2 min-h-[40px]
-          ${hasFived ? "bg-emerald-700/30 text-emerald-200/70 cursor-default" : "bg-emerald-600 text-white hover:bg-emerald-500"}
-          shadow-lg shadow-emerald-600/20 ring-1 ring-emerald-400/30 transition-colors
-          focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400`}
-                aria-pressed={hasFived}
-                title={blocked ? "Global counter blocked by your network; saving locally." : undefined}
-            >
-                <GiHighFive className="h-5 w-5" />
-                {hasFived ? `(${label})` : `(${label})`}
-            </button>
-        </div>
+      <div className="sr-highfive-nav">
+        <button
+          type="button"
+          className={`sr-highfive-nav-button ${
+            hasFived ? "is-given" : ""
+          }`}
+          onClick={giveHighFive}
+          disabled={disabled}
+          aria-pressed={hasFived}
+          aria-label={
+            status === "error"
+              ? "High five counter unavailable"
+              : hasFived
+                ? `High five already given. Total: ${displayedCount}`
+                : `Give a high five. Total: ${displayedCount}`
+          }
+          title={
+            message ||
+            `${displayedCount} high fives received`
+          }
+        >
+          <GiHighFive size={18} aria-hidden="true" />
+
+          <span className="sr-highfive-nav-text">
+            {hasFived ? "High-fived!" : "High Five"}
+          </span>
+
+          <span
+            className="sr-highfive-nav-count"
+            aria-live="polite"
+          >
+            {displayedCount}
+          </span>
+        </button>
+      </div>
     );
+  }
+
+
 }

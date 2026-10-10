@@ -1,0 +1,499 @@
+
+/* =========================================
+   PORTFOLIO FOOTER — DARK EMERALD
+========================================= */
+
+.sr-footer {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  margin: 0;
+
+  border-top: 1px solid rgba(115, 195, 145, 0.2);
+
+  background:
+    radial-gradient(
+      ellipse at 86% 0%,
+      rgba(27, 112, 68, 0.17),
+      transparent 40%
+    ),
+    linear-gradient(
+      180deg,
+      #07110c 0%,
+      #040a07 100%
+    );
+
+  color: #f2f8f3;
+  font-family: "Outfit", sans-serif;
+}
+
+.sr-footer *,
+.sr-footer *::before,
+.sr-footer *::after {
+  box-sizing: border-box;
+}
+
+/* THIN EMERALD LIGHT AT TOP */
+
+.sr-footer::before {
+  content: "";
+  position: absolute;
+
+  top: 0;
+  left: 50%;
+
+  width: min(44vw, 520px);
+  height: 1px;
+
+  transform: translateX(-50%);
+
+  background: linear-gradient(
+    90deg,
+    transparent,
+    #62dfa0,
+    transparent
+  );
+}
+
+.sr-footer-shell {
+  position: relative;
+  width: min(100%, 1160px);
+  margin: 0 auto;
+  padding: 75px 24px 0;
+}
+
+/* =========================================
+   CLOSING STATEMENT
+========================================= */
+
+.sr-footer-top {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 36px;
+
+  padding-bottom: 53px;
+
+  border-bottom:
+    1px solid rgba(149, 204, 168, 0.17);
+}
+
+.sr-footer-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+
+  color: #97d4ac;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.19em;
+}
+
+.sr-footer-status-dot {
+  width: 7px;
+  height: 7px;
+  flex: 0 0 7px;
+
+  border-radius: 50%;
+  background: #56dfa0;
+
+  box-shadow:
+    0 0 13px rgba(70, 224, 148, 0.5);
+}
+
+/* LARGE TYPOGRAPHY */
+
+.sr-footer-opening h2 {
+  margin: 18px 0 0;
+
+  color: #f0f7f1;
+
+  font-size: clamp(40px, 5.5vw, 71px);
+  font-weight: 700;
+  line-height: 1.04;
+  letter-spacing: -0.06em;
+}
+
+.sr-footer-opening h2 span {
+  color: #80dba6;
+}
+
+/* =========================================
+   CONTACT CTA
+========================================= */
+
+.sr-footer-cta {
+  display: flex;
+  flex: 0 0 268px;
+  flex-direction: column;
+  gap: 11px;
+
+  padding: 20px 22px;
+
+  border:
+    1px solid rgba(132, 210, 157, 0.33);
+
+  border-radius: 15px;
+
+  background:
+    rgba(44, 109, 70, 0.15);
+
+  text-decoration: none;
+
+  transition:
+    transform 200ms ease,
+    background 200ms ease,
+    border-color 200ms ease;
+}
+
+.sr-footer-cta > span {
+  color: #99c4a7;
+
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.11em;
+}
+
+.sr-footer-cta strong {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+
+  color: #e0f8e8;
+
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: -0.035em;
+}
+
+.sr-footer-cta strong svg {
+  color: #8be4b2;
+
+  transition: transform 200ms ease;
+}
+
+.sr-footer-cta:hover {
+  transform: translateY(-3px);
+
+  border-color:
+    rgba(128, 230, 166, 0.6);
+
+  background:
+    rgba(54, 138, 84, 0.22);
+}
+
+.sr-footer-cta:hover strong svg {
+  transform: translate(2px, -2px);
+}
+
+/* =========================================
+   MAIN FOOTER COLUMNS
+========================================= */
+
+.sr-footer-main {
+  display: grid;
+
+  grid-template-columns:
+    minmax(0, 1.5fr)
+    minmax(130px, 0.7fr)
+    minmax(0, 1fr);
+
+  gap: 50px;
+  padding: 43px 0 44px;
+}
+
+/* BRAND */
+
+.sr-footer-brand-name {
+  color: #ffffff;
+
+  font-size: 27px;
+  font-weight: 700;
+  letter-spacing: -0.045em;
+
+  text-decoration: none;
+}
+
+.sr-footer-brand-name span {
+  color: #80dba6;
+}
+
+.sr-footer-brand > p {
+  max-width: 290px;
+  margin: 12px 0 0;
+
+  color: #91a99a;
+  font-size: 13px;
+  line-height: 1.8;
+}
+
+/* COLUMN HEADINGS */
+
+.sr-footer-navigation h3,
+.sr-footer-connect h3 {
+  margin: 5px 0 17px;
+
+  color: #9bd5af;
+
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+}
+
+/* =========================================
+   NAVIGATION LINKS
+========================================= */
+
+.sr-footer-navigation ul {
+  display: grid;
+  gap: 10px;
+
+  margin: 0;
+  padding: 0;
+
+  list-style: none;
+}
+
+.sr-footer-navigation a {
+  color: #b7c9bd;
+
+  font-size: 13px;
+  text-decoration: none;
+
+  transition:
+    color 200ms ease;
+}
+
+.sr-footer-navigation a:hover {
+  color: #9df0bc;
+}
+
+/* =========================================
+   SOCIAL LINKS
+========================================= */
+
+.sr-footer-connect > p {
+  margin: -3px 0 17px;
+
+  color: #90a99a;
+
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.sr-footer-socials {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+}
+
+.sr-footer-socials a {
+  display: grid;
+
+  width: 41px;
+  height: 41px;
+
+  place-items: center;
+
+  border:
+    1px solid rgba(123, 183, 146, 0.25);
+
+  border-radius: 11px;
+
+  background:
+    rgba(125, 187, 145, 0.055);
+
+  color: #a9cdb6;
+  text-decoration: none;
+
+  transition:
+    transform 190ms ease,
+    border-color 190ms ease,
+    background 190ms ease,
+    color 190ms ease;
+}
+
+.sr-footer-socials a:hover {
+  transform: translateY(-3px);
+
+  border-color:
+    rgba(124, 220, 162, 0.59);
+
+  background:
+    rgba(50, 139, 81, 0.17);
+
+  color: #d7fbe3;
+}
+
+/* =========================================
+   COPYRIGHT ROW
+========================================= */
+
+.sr-footer-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+
+  gap: 14px 25px;
+  padding: 21px 0;
+
+  border-top:
+    1px solid rgba(149, 204, 168, 0.17);
+
+  color: #789382;
+  font-size: 11px;
+}
+
+/* BACK TO TOP */
+
+.sr-footer-bottom a {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+
+  color: #a3ddba;
+
+  font-size: 11px;
+  font-weight: 650;
+  text-decoration: none;
+
+  transition:
+    color 180ms ease,
+    transform 180ms ease;
+}
+
+.sr-footer-bottom a:hover {
+  color: #d1f9df;
+  transform: translateY(-2px);
+}
+
+/* =========================================
+   LARGE BACKGROUND SIGNATURE
+========================================= */
+
+.sr-footer-wordmark {
+  margin: 7px 0 -0.09em;
+  overflow: hidden;
+
+  color: rgba(137, 218, 162, 0.075);
+
+  font-size: clamp(45px, 9.7vw, 134px);
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.085em;
+
+  text-align: center;
+  white-space: nowrap;
+
+  user-select: none;
+  pointer-events: none;
+}
+
+.sr-footer-wordmark span {
+  color: rgba(107, 231, 154, 0.18);
+}
+
+/* =========================================
+   ACCESSIBILITY
+========================================= */
+
+.sr-footer a:focus-visible {
+  outline: 2px solid #88efb2;
+  outline-offset: 4px;
+  border-radius: 4px;
+}
+
+/* =========================================
+   TABLET
+========================================= */
+
+@media (max-width: 850px) {
+
+  .sr-footer-top {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 28px;
+  }
+
+  .sr-footer-cta {
+    flex-basis: auto;
+    width: min(100%, 340px);
+  }
+
+  .sr-footer-main {
+    grid-template-columns: 1.3fr 1fr;
+    gap: 32px;
+  }
+
+  .sr-footer-brand {
+    grid-column: 1 / -1;
+  }
+}
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 580px) {
+
+  .sr-footer-shell {
+    padding: 57px 19px 0;
+  }
+
+  .sr-footer-top {
+    padding-bottom: 36px;
+  }
+
+  .sr-footer-opening h2 {
+    font-size: clamp(37px, 10vw, 50px);
+  }
+
+  .sr-footer-main {
+    grid-template-columns: 1fr 1fr;
+    gap: 31px 17px;
+
+    padding: 35px 0;
+  }
+
+  .sr-footer-brand > p {
+    max-width: 360px;
+  }
+
+  .sr-footer-socials {
+    gap: 7px;
+  }
+
+  .sr-footer-socials a {
+    width: 38px;
+    height: 38px;
+  }
+
+  .sr-footer-bottom {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 11px;
+  }
+
+  .sr-footer-made-with {
+    display: none;
+  }
+
+  .sr-footer-wordmark {
+    margin-top: 18px;
+    font-size: 10vw;
+  }
+}
+
+/* =========================================
+   REDUCED MOTION
+========================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .sr-footer a,
+  .sr-footer a svg {
+    transition: none !important;
+  }
+}

@@ -1,236 +1,499 @@
-import React from "react";
+
+import {
+  FiArrowUpRight,
+  FiAward,
+  FiBookOpen,
+  FiBriefcase,
+  FiCode,
+  FiDownload,
+  FiExternalLink,
+  FiGitBranch,
+  FiLayers,
+} from "react-icons/fi";
+
 import RevealOnScroll from "../RevealOnScroll";
-import SectionHeading from "../SectionHeading";
-import DownloadCV from "../DownloadCV";
+import cvFile from "../../assets/Sadik_Rahman_CV_2026.pdf";
+import "../../styles/about.css";
 
-const About = () => {
+const frontendSkills = [
+  "React",
+  "Tailwind CSS",
+  "TypeScript",
+  "Next.js",
+];
 
-    const aboutMe = "I’m a backend engineer focused on building reliable, high-performance APIs using Node.js, Python, MySQL, and MongoDB. I stay sharp with LeetCode to catch edge cases early, and when I'm not shipping features, I'm researching RL and deep learning—tackling problems like power grid optimization and image classification. I'm all about small, safe changes, clear docs, and making production incidents as boring as possible."
+const backendSkills = [
+  "Node.js",
+  "Python",
+  "MySQL",
+  "MongoDB",
+  "Laravel",
+];
 
-    const frontendSkills = ["React", "TailwindCSS", "TypeScript", "NextJS"];
-    const backendSkills = ["NodeJS", "Python", "MySQL", "MongoDB", "Laravel"];
+const education = [
+  {
+    degree: "B.Sc in Computer Science",
+    institute:
+      "Ahsanullah University of Science & Technology",
+  },
+  {
+    degree: "Higher Secondary Certificate",
+    institute: "Ispahani Public School & College",
+  },
+  {
+    degree: "Secondary School Certificate",
+    institute: "Nasirabad Government High School",
+  },
+];
 
-    return (
-        <section
-            id="about"
-            className="mt-15 relative min-h-screen flex items-center justify-center py-20 overflow-hidden"
-        >
-            <RevealOnScroll>
+const research = [
+  {
+    number: "01",
+    title: "Power Grid Transmission Optimization (RL)",
+    description:
+      "Developing a reinforcement learning approach to reduce transmission loss to 2–3% in the Bangladeshi Power Grid.",
+    technologies: [
+      "Reinforcement Learning",
+      "Python",
+      "Simulation",
+    ],
+    progress:
+      "Submitted to ICCIT 2026",
+  },
+  {
+    number: "02",
+    title: "Bank Note Fitness Classifier",
+    description:
+      "Deep learning project to classify the fitness and condition of Bangladeshi Taka notes.",
+    technologies: [
+      "Deep Learning",
+      "ResNet",
+      "EfficientNet",
+      "Computer Vision",
+    ],
+    progress:
+      "80%+ accuracy achieved on an initial 150-image dataset.",
+  },
+  {
+    number: "03",
+    title: "UCL Match Predictor",
+    description:
+      "Statistical modeling to predict UEFA Champions League results based on clubs' domestic performance metrics.",
+    technologies: [
+      "Poisson Distribution",
+      "Monte Carlo Simulation",
+      "Statistical Modeling",
+      "Dixon-Coles"
+    ],
+    progress:
+      "Correctly predicted 18/29 knockout matches of season 2025/26 beating bet365 on a narrow margin",
+  },
+];
 
-                <div className="pointer-events-none absolute -bottom-40 left-0 h-72 w-72 rounded-full bg-emerald-700/10 blur-3xl" />
+const awards = [
+  {
+    title: "Code Alchemy: Refactoring Contest",
+    event: "AUST CSE Carnival 5.0, Fall-23",
+    result: "Champion",
+  },
+  {
+    title: "Quiz Contest",
+    event: "AUST CSE Carnival 3 & 4, Spring-23 & Fall-22",
+    result: "Runners-Up",
+  },
+  {
+    title: "Chess Competition",
+    event: "AUST CSE Carnival 2.0",
+    result: "Runners-Up",
+  },
+  {
+    title: "Intra Department Football Tournament",
+    event: "Fall-23",
+    result: "Runners-Up",
+  },
+];
 
-                <div className="max-w-5xl mx-auto px-4">
-                    <SectionHeading>About Me</SectionHeading>
+const extras = [
+  {
+    name: "LeetCode",
+    detail: "100+ Problems Solved",
+    href: "https://leetcode.com/u/user7126SD/",
+  },
+  {
+    name: "Chess.com",
+    detail: "Peak: 1400+",
+    href: "https://www.chess.com/member/sadikrahman",
+  },
+  {
+    name: "Lichess",
+    detail: "Peak: 1450+",
+    href: "https://lichess.org/@/SadikRahman",
+    },
+  {
+    name: "Codeforces",
+    detail: "Peak: 1000+",
+    href: "https://codeforces.com/profile/SadikRahman14",
+  },
+];
 
-                    <div className="relative rounded-xl border border-white/10 bg-white/[0.02] p-8 backdrop-blur-sm hover:-translate-y-1 transition-all">
-                        <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-emerald-500/50 to-transparent" />
-                        <p className="text-gray-300 leading-relaxed mb-6 align-middle">
-                            {aboutMe}
-                        </p>
-                        
-                    </div>
+function SkillList({ title, skills }) {
+  return (
+    <div className="sr-about-skill-group">
+      <h4>{title}</h4>
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
-                        
-                        {/* Education */}
-                        <div className="relative p-6 rounded-xl border border-white/10 bg-emerald-950/40 hover:-translate-y-1 transition-all">
-                            <h3 className="text-2xl font-bold text-green-200 mb-4">Education</h3>
+      <div className="sr-about-pills">
+        {skills.map((skill) => (
+          <span key={skill}>{skill}</span>
+        ))}
+      </div>
+    </div>
+  );
+}
 
-                            <ul className="space-y-5">
-                                <li className="relative pl-8">
-                                    <span className="absolute left-0 top-2 h-3 w-3 rounded-full bg-emerald-400 shadow-[0_0_0_4px_rgba(16,185,129,0.15)]" />
-                                    <strong className="text-white block">B.Sc in Computer Science</strong>
-                                    <p className="text-gray-300">Ahsanullah University of Science &amp; Technology</p>
-                                </li>
+function CardHeading({ icon: Icon, eyebrow, title }) {
+  return (
+    <div className="sr-about-card-heading">
+      <span
+        className="sr-about-card-icon"
+        aria-hidden="true"
+      >
+        <Icon size={19} />
+      </span>
 
-                                <li className="relative pl-8">
-                                    <span className="absolute left-0 top-2 h-3 w-3 rounded-full bg-emerald-400 shadow-[0_0_0_4px_rgba(16,185,129,0.15)]" />
-                                    <strong className="text-white block">Higher Secondary Certificate</strong>
-                                    <p className="text-gray-300">Ispahani Public School &amp; College</p>
-                                </li>
+      <div>
+        <span className="sr-about-card-kicker">
+          {eyebrow}
+        </span>
+        <h3>{title}</h3>
+      </div>
+    </div>
+  );
+}
 
-                                <li className="relative pl-8">
-                                    <span className="absolute left-0 top-2 h-3 w-3 rounded-full bg-emerald-400 shadow-[0_0_0_4px_rgba(16,185,129,0.15)]" />
-                                    <strong className="text-white block">Secondary School Certificate</strong>
-                                    <p className="text-gray-300">Nasirabad Government High School</p>
-                                </li>
-                            </ul>
-                        </div>
+export default function About() {
+  return (
+    <section
+      id="about"
+      className="sr-about"
+      aria-labelledby="sr-about-title"
+    >
+      <div className="sr-about-shell">
 
-                        {/* Awards */}
-                        <div className="relative p-6 rounded-xl border border-white/10 bg-emerald-950/40 hover:-translate-y-1 transition-all">
-                            <h3 className="text-2xl font-bold text-green-200 mb-4">Awards</h3>
+        {/* INTRODUCTION AND TECH STACK */}
+        <RevealOnScroll>
+          <header className="sr-about-intro">
+            <div className="sr-about-intro-copy">
+              <div className="sr-about-kicker">
+                <span
+                  className="sr-about-kicker-dot"
+                  aria-hidden="true"
+                />
+                A LITTLE ABOUT ME
+              </div>
 
-                            <ul className="space-y-5">
-                                <li className="relative pl-8">
-                                    <span className="absolute left-0 top-2 h-3 w-3 rounded-full bg-emerald-400 shadow-[0_0_0_4px_rgba(16,185,129,0.15)]" />
-                                    <strong className="text-white block">Code Alchemy : Refactoring Contest</strong>
-                                    <p className="text-gray-300">AUST CSE Carnival 5.0, Fall-23</p>
-                                    <strong className="text-emerald-300">Champion</strong>
-                                </li>
+              <h2 id="sr-about-title">
+                More than <span>just code.</span>
+              </h2>
 
-                                <li className="relative pl-8">
-                                    <span className="absolute left-0 top-2 h-3 w-3 rounded-full bg-emerald-400 shadow-[0_0_0_4px_rgba(16,185,129,0.15)]" />
-                                    <strong className="text-white block">Quiz Contest</strong>
-                                    <p className="text-gray-300">AUST CSE Carnival 3 &amp; 4, Spring-23 &amp; Fall-22</p>
-                                    <strong className="text-emerald-300">Runners-Up</strong>
-                                </li>
+              <p>
+                I'm a full-stack developer with a strong
+                interest in building reliable, high-performance
+                APIs using Node.js, Python, MySQL, and MongoDB.
+                I sharpen my problem-solving skills with
+                LeetCode and explore reinforcement learning,
+                deep learning, and predictive modeling through
+                research.
+              </p>
 
-                                <li className="relative pl-8">
-                                    <span className="absolute left-0 top-2 h-3 w-3 rounded-full bg-emerald-400 shadow-[0_0_0_4px_rgba(16,185,129,0.15)]" />
-                                    <strong className="text-white block">Chess Competetion</strong>
-                                    <p className="text-gray-300">AUST CSE Carnival 2.0</p>
-                                    <strong className="text-emerald-300">Runners-Up</strong>
-                                </li>
+              <div className="sr-about-intro-note">
+                <FiGitBranch
+                  size={16}
+                  aria-hidden="true"
+                />
+                Small, safe changes. Clear documentation.
+                Thoughtful engineering.
+              </div>
+            </div>
 
-                                <li className="relative pl-8">
-                                    <span className="absolute left-0 top-2 h-3 w-3 rounded-full bg-emerald-400 shadow-[0_0_0_4px_rgba(16,185,129,0.15)]" />
-                                    <strong className="text-white block">Intra Department Football Tournament</strong>
-                                    <p className="text-gray-300">Fall-23</p>
-                                    <strong className="text-emerald-300">Runners-Up</strong>
-                                </li>
-                            </ul>
-                        </div>
-
-                        {/* Research Interest */}
-                        <div className="relative p-6 rounded-xl border border-white/10 bg-emerald-950/40 hover:-translate-y-1 transition-all md:col-span-2">
-                            <h3 className="text-2xl font-bold text-green-200 mb-4"> Research Interest </h3>
-
-                            <ul className="space-y-6">
-                                <li className="relative pl-8">
-                                    <span className="absolute left-0 top-2 h-3 w-3 rounded-full bg-emerald-400 shadow-[0_0_0_4px_rgba(16,185,129,0.15)]" />
-                                    <strong className="text-white block">Power Grid Transmission Optimization (RL)</strong>
-                                    <p className="text-gray-300">
-                                        Developing a reinforcement learning approach to reduce transmission loss to 2-3% in the Bangladeshi Power Grid.
-                                    </p>
-
-                                    <div className="mt-2 flex flex-wrap gap-2">
-                                        <span className="text-xs rounded-full bg-emerald-700/30 text-emerald-200 px-2 py-1">Reinforcement Learning</span>
-                                        <span className="text-xs rounded-full bg-emerald-700/30 text-emerald-200 px-2 py-1">Python</span>
-                                        <span className="text-xs rounded-full bg-emerald-700/30 text-emerald-200 px-2 py-1">Simulation</span>
-                                    </div>
-
-                                    <div className="mt-2 flex items-center gap-3">
-                                        <strong className="text-emerald-300">Status: Successfully simulated a subsection of the Khulna division grid.</strong>
-                                    </div>
-                                </li>
-
-                                <li className="relative pl-8">
-                                    <span className="absolute left-0 top-2 h-3 w-3 rounded-full bg-emerald-400 shadow-[0_0_0_4px_rgba(16,185,129,0.15)]" />
-                                    <strong className="text-white block">Taka Note Fitness Classifier</strong>
-                                    <p className="text-gray-300">
-                                        Deep learning project to classify the fitness and condition of Bangladeshi Taka notes.
-                                    </p>
-
-                                    <div className="mt-2 flex flex-wrap gap-2">
-                                        <span className="text-xs rounded-full bg-emerald-700/30 text-emerald-200 px-2 py-1">Deep Learning</span>
-                                        <span className="text-xs rounded-full bg-emerald-700/30 text-emerald-200 px-2 py-1">ResNet</span>
-                                        <span className="text-xs rounded-full bg-emerald-700/30 text-emerald-200 px-2 py-1">EfficientNet</span>
-                                        <span className="text-xs rounded-full bg-emerald-700/30 text-emerald-200 px-2 py-1">Computer Vision</span>
-                                    </div>
-
-                                    <div className="mt-2 flex items-center gap-3">
-                                        <strong className="text-emerald-300">Status: 80%+ accuracy achieved on an initial 150-image dataset.</strong>
-                                    </div>
-                                </li>
-
-                                <li className="relative pl-8">
-                                    <span className="absolute left-0 top-2 h-3 w-3 rounded-full bg-emerald-400 shadow-[0_0_0_4px_rgba(16,185,129,0.15)]" />
-                                    <strong className="text-white block">UCL Match Predictor</strong>
-                                    <p className="text-gray-300">
-                                        Statistical modeling to predict UEFA Champions League results based on clubs' domestic performance metrics.
-                                    </p>
-
-                                    <div className="mt-2 flex flex-wrap gap-2">
-                                        <span className="text-xs rounded-full bg-emerald-700/30 text-emerald-200 px-2 py-1">Poisson Distribution</span>
-                                        <span className="text-xs rounded-full bg-emerald-700/30 text-emerald-200 px-2 py-1">Monte Carlo Simulation</span>
-                                        <span className="text-xs rounded-full bg-emerald-700/30 text-emerald-200 px-2 py-1">Predictive Modeling</span>
-                                    </div>
-
-                                    <div className="mt-2 flex items-center gap-3">
-                                        <strong className="text-emerald-300">Status: Correctly predicted 7/8 matches in the UCL 2025-26 Round of 16.</strong>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-
-                        {/* Work Experience */}
-                        <div className="relative p-6 rounded-xl border border-white/10 bg-emerald-950/40 hover:-translate-y-1 transition-all shadow-lg shadow-emerald-900/20">
-                            <h3 className="text-2xl font-bold text-green-200 mb-4">Work Experience</h3>
-
-                            <ul className="space-y-6">
-                                <li className="relative pl-8">
-                                    <span className="absolute left-0 top-2 h-3 w-3 rounded-full bg-emerald-400 shadow-[0_0_0_4px_rgba(16,185,129,0.15)]" />
-                                    <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1">
-                                        <strong className="text-white block">
-                                            Backend Developer <span className="text-emerald-300/90">·</span> AUST Ahsanullah (R.) Peace Club
-                                        </strong>
-                                    </div>
-
-                                    <p className="mt-2 text-gray-300">
-                                        Building and maintaining backend services and APIs used by club initiatives and event platforms.
-                                        I focus on clean domain models, predictable performance, and instrumentation for quick debugging.
-                                    </p>
-
-                                    <div className="mt-3 flex flex-wrap gap-2">
-                                        <span className="text-xs rounded-full bg-emerald-700/30 text-emerald-200 px-2 py-1">Node.js</span>
-                                        <span className="text-xs rounded-full bg-emerald-700/30 text-emerald-200 px-2 py-1">Express</span>
-                                        <span className="text-xs rounded-full bg-emerald-700/30 text-emerald-200 px-2 py-1">Supabase</span>
-                                        <span className="text-xs rounded-full bg-emerald-700/30 text-emerald-200 px-2 py-1">JWT/Auth</span>
-                                        <span className="text-xs rounded-full bg-emerald-700/30 text-emerald-200 px-2 py-1">Redis (cache)</span>
-                                        <span className="text-xs rounded-full bg-emerald-700/30 text-emerald-200 px-2 py-1">GitHub Actions</span>
-                                    </div>
-
-                                    <div className="mt-3 flex flex-wrap items-center gap-3">
-                                        <span className="inline-flex items-center rounded-full border border-emerald-500/30 bg-emerald-500/10 px-2.5 py-1 text-xs font-semibold text-emerald-200">
-                                            Sept. 2025 - Present
-                                        </span>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-
-                         {/* Extras */}
-                         <div className="relative p-6 rounded-xl border border-white/10 bg-emerald-950/40 hover:-translate-y-1 transition-all shadow-lg shadow-emerald-900/20">
-                            <h3 className="text-2xl font-bold text-green-200 mb-4">Extras</h3>
-
-                            <ul className="space-y-6">
-                                <li className="relative pl-8">
-                                    <span className="absolute left-0 top-2 h-3 w-3 rounded-full bg-emerald-400 shadow-[0_0_0_4px_rgba(16,185,129,0.15)]" />
-                                    <strong className="text-white block">LeetCode</strong>
-                                    <p className="text-gray-300 mt-1">
-                                        <strong>80+ Problems Solved</strong>
-                                    </p>
-                                    <a href="https://leetcode.com/u/user7126SD/" className="text-emerald-400 hover:text-emerald-300 text-sm inline-block mt-1">View Profile ↝</a>
-                                </li>
-
-                                <li className="relative pl-8">
-                                    <span className="absolute left-0 top-2 h-3 w-3 rounded-full bg-emerald-400 shadow-[0_0_0_4px_rgba(16,185,129,0.15)]" />
-                                    <strong className="text-white block">Chess.com</strong>
-                                    <p className="text-gray-300 mt-1">
-                                         <strong>Peak: 1400+</strong> 
-                                    </p>
-                                     <a href="https://www.chess.com/member/sadikrahman" className="text-emerald-400 hover:text-emerald-300 text-sm inline-block mt-1">View Profile ↝</a>
-                                </li>
-
-                                <li className="relative pl-8">
-                                    <span className="absolute left-0 top-2 h-3 w-3 rounded-full bg-emerald-400 shadow-[0_0_0_4px_rgba(16,185,129,0.15)]" />
-                                    <strong className="text-white block">Lichess</strong>
-                                    <p className="text-gray-300 mt-1">
-                                         <strong> Peak: 1450+ </strong>
-                                    </p>
-                                     <a href="https://lichess.org/@/SadikRahman" className="text-emerald-400 hover:text-emerald-300 text-sm inline-block mt-1">View Profile ↝</a>
-                                </li>
-                                
-                            </ul>
-                        </div>
-
-                    </div>
-                    <DownloadCV />
+            <aside
+              className="sr-about-stack"
+              aria-label="Technical skills"
+            >
+              <div className="sr-about-stack-top">
+                <div>
+                  <span className="sr-about-stack-label">
+                    MY TOOLKIT
+                  </span>
+                  <h3>Technologies I work with</h3>
                 </div>
-            </RevealOnScroll>
-        </section>
-    );
-};
 
-export default About;
+                <FiCode
+                  size={23}
+                  aria-hidden="true"
+                />
+              </div>
+
+              <SkillList
+                title="Frontend"
+                skills={frontendSkills}
+              />
+
+              <SkillList
+                title="Backend & data"
+                skills={backendSkills}
+              />
+            </aside>
+          </header>
+        </RevealOnScroll>
+
+        {/* EXPERIENCE AND EDUCATION */}
+        <RevealOnScroll>
+          <div className="sr-about-two-column">
+
+            <article className="sr-about-panel">
+              <CardHeading
+                icon={FiBriefcase}
+                eyebrow=""
+                title="Experience"
+              />
+
+              <div className="sr-about-timeline">
+                <div className="sr-about-timeline-item">
+                  <span className="sr-about-period">
+                    SEPT 2025 — PRESENT
+                  </span>
+
+                  <h4>Backend Developer</h4>
+
+                  <p className="sr-about-organization">
+                    AUST Ahsanullah (R.) Peace Club
+                  </p>
+
+                  <p className="sr-about-detail">
+                    Building and maintaining backend
+                    services and APIs used by club
+                    initiatives and event platforms.
+                    I focus on clean domain models,
+                    predictable performance, and
+                    instrumentation for quick debugging.
+                  </p>
+
+                  <div className="sr-about-pills sr-about-pills--subtle">
+                    {[
+                      "Node.js",
+                      "Express",
+                      "Supabase",
+                      "JWT/Auth",
+                      "Redis (cache)",
+                      "GitHub Actions",
+                    ].map((tech) => (
+                      <span key={tech}>{tech}</span>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </article>
+
+            <article className="sr-about-panel">
+              <CardHeading
+                icon={FiBookOpen}
+                eyebrow=""
+                title="Education"
+              />
+
+              <ol className="sr-about-education-list">
+                {education.map((item, index) => (
+                  <li key={item.degree}>
+                    <span className="sr-about-edu-number">
+                      0{index + 1}
+                    </span>
+
+                    <div>
+                      <h4>{item.degree}</h4>
+                      <p>{item.institute}</p>
+                    </div>
+                  </li>
+                ))}
+              </ol>
+            </article>
+
+          </div>
+        </RevealOnScroll>
+
+        {/* RESEARCH */}
+        <RevealOnScroll>
+          <section
+            className="sr-about-research"
+            aria-labelledby="sr-about-research-title"
+          >
+            <div className="sr-about-section-heading">
+              <div>
+                <span className="sr-about-section-kicker">
+                  EXPLORING WHAT'S NEXT
+                </span>
+
+                <h3 id="sr-about-research-title">
+                  Research <span>& interests.</span>
+                </h3>
+              </div>
+            </div>
+
+            <div className="sr-about-research-grid">
+              {research.map((item) => (
+                <article
+                  key={item.number}
+                  className="sr-about-research-card"
+                >
+                  <div className="sr-about-research-top">
+                    <span>
+                      RESEARCH / {item.number}
+                    </span>
+                    <FiLayers
+                      size={18}
+                      aria-hidden="true"
+                    />
+                  </div>
+
+                  <h4>{item.title}</h4>
+
+                  <p className="sr-about-research-description">
+                    {item.description}
+                  </p>
+
+                  <div className="sr-about-pills sr-about-pills--subtle">
+                    {item.technologies.map((tech) => (
+                      <span key={tech}>{tech}</span>
+                    ))}
+                  </div>
+
+                  <div className="sr-about-progress">
+                    <span
+                      className="sr-about-progress-dot"
+                      aria-hidden="true"
+                    />
+
+                    <div>
+                      <strong>PROGRESS</strong>
+                      <p>{item.progress}</p>
+                    </div>
+                  </div>
+                </article>
+              ))}
+            </div>
+          </section>
+        </RevealOnScroll>
+
+        {/* AWARDS AND EXTRA ACTIVITIES */}
+        <RevealOnScroll>
+          <div className="sr-about-two-column sr-about-bottom-grid">
+
+            <article className="sr-about-panel">
+              <CardHeading
+                icon={FiAward}
+                eyebrow=""
+                title="Awards & recognition"
+              />
+
+              <ul className="sr-about-awards-list">
+                {awards.map((award) => (
+                  <li key={award.title}>
+                    <div>
+                      <h4>{award.title}</h4>
+                      <p>{award.event}</p>
+                    </div>
+
+                    <span className="sr-about-award-result">
+                      {award.result}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            </article>
+
+            <article className="sr-about-panel">
+              <CardHeading
+                icon={FiArrowUpRight}
+                eyebrow=""
+                title="Beyond development"
+              />
+              <div className="sr-about-extras-list">
+                {extras.map((item) => (
+                  <a
+                    key={item.name}
+                    href={item.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={`View ${item.name} profile`}
+                  >
+                    <div>
+                      <strong>{item.name}</strong>
+                      <span>{item.detail}</span>
+                    </div>
+
+                    <FiExternalLink
+                      size={17}
+                      aria-hidden="true"
+                    />
+                  </a>
+                ))}
+              </div>
+            </article>
+
+          </div>
+        </RevealOnScroll>
+
+        {/* DOWNLOAD CV */}
+        <RevealOnScroll>
+          <section
+            id="cv"
+            className="sr-about-cv"
+            aria-labelledby="sr-about-cv-title"
+          >
+            <div>
+              <span className="sr-about-cv-kicker">
+                MORE ABOUT MY WORK
+              </span>
+
+              <h3 id="sr-about-cv-title">
+                Want the full picture?
+              </h3>
+
+              <p>
+                Take a closer look at my experience,
+                skills, and background.
+              </p>
+            </div>
+
+            <div className="sr-about-cv-actions">
+              <a
+                href={cvFile}
+                download="Sadik_Rahman_CV.pdf"
+                className="sr-about-cv-primary"
+              >
+                <FiDownload
+                  size={17}
+                  aria-hidden="true"
+                />
+                Download CV
+              </a>
+
+              <a
+                href={cvFile}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="sr-about-cv-secondary"
+              >
+                <FiExternalLink
+                  size={17}
+                  aria-hidden="true"
+                />
+                View online
+              </a>
+            </div>
+          </section>
+        </RevealOnScroll>
+
+      </div>
+    </section>
+  );
+}

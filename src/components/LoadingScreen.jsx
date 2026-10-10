@@ -1,75 +1,134 @@
-import React, { useEffect, useRef, useState } from 'react'
-import me from "../assets/me_bg_resize.png"
 
-const LoadingScreen = ({ onComplete }) => {
+import { useEffect, useState } from "react";
+import { FiArrowRight } from "react-icons/fi";
+
+import me from "../assets/me_bg_resize.png";
+
+const FULL_TEXT = "<SadikRahman.../>";
+
+// Total animation time: 2.3 seconds
+const INTRO_DURATION = 2300;
+const EXIT_START = 1800;
+const TYPING_START = 180;
+const TYPING_SPEED = 65;
+
+export default function LoadingScreen({ onComplete }) {
   const [text, setText] = useState("");
   const [isExiting, setIsExiting] = useState(false);
-  const fullText = "<SadikRahman.../>";
-
-  const timers = useRef([]);
 
   useEffect(() => {
-    let index = 0;
-
-    function typeNextChar() {
-      if (index <= fullText.length) {
-        setText(fullText.substring(0, index));
-        index++;
-
-        let delay = 100;
-        if (index === 13 || index === 14 || index === 15 || index === 16) {
-          delay = 500;
-        }
-
-        const id = setTimeout(typeNextChar, delay);
-        timers.current.push(id);
-      } else {
-        setIsExiting(true);
-        const id = setTimeout(() => onComplete(), 1000);
-        timers.current.push(id);
-      }
+    // Respect accessibility settings.
+    if (
+      window.matchMedia(
+        "(prefers-reduced-motion: reduce)"
+      ).matches
+    ) {
+      onComplete();
+      return;
     }
 
-    typeNextChar();
+    let index = 0;
+    let typingInterval;
 
+    // Start typing after the portrait appears.
+    const typingTimer = window.setTimeout(() => {
+      typingInterval = window.setInterval(() => {
+        index += 1;
+
+        setText(FULL_TEXT.slice(0, index));
+
+        if (index >= FULL_TEXT.length) {
+          window.clearInterval(typingInterval);
+        }
+      }, TYPING_SPEED);
+    }, TYPING_START);
+
+    // Begin the transition to the homepage.
+    const exitTimer = window.setTimeout(() => {
+      setIsExiting(true);
+    }, EXIT_START);
+
+    // Remove the loading screen.
+    const completeTimer = window.setTimeout(() => {
+      onComplete();
+    }, INTRO_DURATION);
+
+    // Prevent timers from surviving unmount.
     return () => {
-      timers.current.forEach(clearTimeout);
-      timers.current = [];
+      window.clearTimeout(typingTimer);
+      window.clearTimeout(exitTimer);
+      window.clearTimeout(completeTimer);
+      window.clearInterval(typingInterval);
     };
-  }, [fullText, onComplete]);
+  }, [onComplete]);
 
   return (
     <div
-      className={
-        `fixed inset-0 z-50 bg-black text-gray-100 flex flex-col justify-center items-center
-         transition-opacity duration-500 ${isExiting ? 'opacity-0' : 'opacity-100'}`
-      }
+      className={`portfolio-intro-overlay ${
+        isExiting ? "is-exiting" : ""
+      }`}
       role="status"
-      aria-live="polite"
+      aria-label="Opening Sadik Rahman's portfolio"
     >
-      <div className="relative mx-auto mb-8 w-35 h-35 md:w-35 md:h-35">
+      {/* Ambient background */}
+      <div
+        className="portfolio-intro-ambient"
+        aria-hidden="true"
+      />
+
+      {/* Top label */}
+      <div className="portfolio-intro-top">
+        <span className="portfolio-intro-status-dot" />
+        PORTFOLIO / INITIALIZING
+      </div>
+
+      {/* Main animation */}
+      <div className="portfolio-intro-content">
+        <div className="portfolio-intro-photo-wrap">
+          <div
+            className="portfolio-intro-photo-glow"
+            aria-hidden="true"
+          />
+
+          <img
+            src={me}
+            alt=""
+            className="portfolio-intro-photo"
+            draggable={false}
+          />
+        </div>
+
+        {/* Typewriter */}
         <div
-          className="absolute -inset-1 rounded-full bg-gradient-to-tr from-emerald-400 to-emerald-800 blur-lg opacity-60"
-          aria-hidden
-        />
-        <img
-          src={me}
-          alt="Portrait of Sadik Rahman"
-          className="relative rounded-full object-cover border border-white/10 shadow-lg"
-          draggable="false"
-        />
+          className="portfolio-intro-title"
+          aria-hidden="true"
+        >
+          {text}
+          <span className="portfolio-intro-cursor" />
+        </div>
+
+        <p className="portfolio-intro-subtitle">
+          Building the experience
+        </p>
+
+        {/* Animated loading progress */}
+        <div
+          className="portfolio-intro-progress"
+          aria-hidden="true"
+        >
+          <div className="portfolio-intro-progress-fill" />
+        </div>
       </div>
 
-      <div className='mb-4 text-2xl sm:text-3xl md:text-4xl font-mono font-bold text-green-700'>
-        {text}
-        <span className='animate-blink motion-reduce:hidden ml-1' aria-hidden> </span>
-      </div>
-
-      <div className='w-[200px] h-[2px] bg-gray-800 rounded relative overflow-hidden'>
-        <div className='w-[40%] h-full bg-blue-800 shadow-[0_0_15px_#3b82f6] animate-loading-bar motion-reduce:animate-none' />
-      </div>
+      {/* Skip option */}
+      <button
+        type="button"
+        className="portfolio-intro-skip"
+        onClick={onComplete}
+      >
+        Skip intro
+        <FiArrowRight size={15} aria-hidden="true" />
+      </button>
     </div>
-  )
+  );
 }
-
-export default LoadingScreen

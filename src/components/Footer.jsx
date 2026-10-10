@@ -1,97 +1,179 @@
-// src/components/Footer.jsx
-import React from "react";
-import { FaGithub, FaXTwitter, FaLinkedin, FaFacebook } from "react-icons/fa6";
-import { FiMail } from "react-icons/fi";
 
-// Edit these without touching the design:
+import {
+  FaFacebook,
+  FaGithub,
+  FaLinkedin,
+  FaXTwitter,
+} from "react-icons/fa6";
+
+import {
+  FiArrowUp,
+  FiArrowUpRight,
+  FiMail,
+} from "react-icons/fi";
+
+import "../styles/footer.css";
+
 const NAV_LINKS = [
-    { label: "Home", href: "#home" },
-    { label: "Projects", href: "#projects" },
-    { label: "About", href: "#about" },
-    { label: "Contact", href: "#contact" },
+  { label: "Home", href: "#home" },
+  { label: "Latest project", href: "#latest" },
+  { label: "About", href: "#about" },
+  { label: "Projects", href: "#projects" },
+  { label: "Contact", href: "#contact" },
 ];
 
 const SOCIALS = [
-    { label: "GitHub", href: "https://github.com/SadikRahman14", Icon: FaGithub },
-    { label: "X", href: "https://x.com/SadikRa94780860", Icon: FaXTwitter },
-    { label: "LinkedIn", href: "https://www.linkedin.com/in/sadik-rahman-7b0658253/", Icon: FaLinkedin },
-    { label: "Email", href: "mailto:sadik.nai.008@gmail.com", Icon: FiMail },
-    { label: "Facebook", href: "https://www.facebook.com/SadikRahman14p/", Icon: FaFacebook },
+  {
+    label: "GitHub",
+    href: "https://github.com/SadikRahman14",
+    Icon: FaGithub,
+  },
+  {
+    label: "LinkedIn",
+    href: "https://www.linkedin.com/in/sadik-rahman-7b0658253/",
+    Icon: FaLinkedin,
+  },
+  {
+    label: "X",
+    href: "https://x.com/SadikRa94780860",
+    Icon: FaXTwitter,
+  },
+  {
+    label: "Facebook",
+    href: "https://www.facebook.com/SadikRahman14p/",
+    Icon: FaFacebook,
+  },
+  {
+    label: "Email",
+    href: "mailto:sadik.nai.008@gmail.com",
+    Icon: FiMail,
+  },
 ];
 
-const Footer = () => {
-    return (
-        <footer className="relative mt-20 border-t border-white/10">
-            {/* soft background accents */}
-            <div aria-hidden className="pointer-events-none absolute -top-24 right-0 h-64 w-64 rounded-full bg-emerald-500/10 blur-3xl" />
-            <div aria-hidden className="pointer-events-none absolute -bottom-24 left-0 h-56 w-56 rounded-full bg-emerald-700/10 blur-3xl" />
-            {/* thin emerald highlight */}
-            <div aria-hidden className="pointer-events-none absolute inset-x-0 -top-px h-px bg-gradient-to-r from-transparent via-emerald-500/40 to-transparent" />
+export default function Footer() {
+  return (
+    <footer className="sr-footer">
+      <div className="sr-footer-shell">
 
-            <div className="relative z-10 max-w-6xl mx-auto px-4 py-10">
-                <div className="grid grid-cols-1 md:grid-cols-3 items-center md:items-start gap-6">
-                    {/* Brand */}
-                    <div className="text-center md:text-left">
-                        <div className="text-2xl font-bold bg-gradient-to-r from-emerald-400 to-emerald-800 bg-clip-text text-transparent">
-                            Sadik Rahman
-                        </div>
-                        <p className="mt-2 text-sm text-gray-400"> Backend Developer.</p>
-                    </div>
+        {/* ==================================
+            CLOSING STATEMENT
+        ================================== */}
 
-                    {/* Nav */}
-                    <nav className="order-3 md:order-none">
-                        <ul className="flex justify-center flex-wrap gap-4">
-                            {NAV_LINKS.map((item) => (
-                                <li key={item.label}>
-                                    <a href={item.href} className="text-emerald-2 00/80 hover:text-emerald-200 transition">
-                                        {item.label}
-                                    </a>
-                                </li>
-                            ))}
-                        </ul>
-                    </nav>
+        
 
-                    {/* Socials */}
-                    <div className="flex justify-center md:justify-end gap-3">
-                        {SOCIALS.map(({ label, href, Icon }) => (
-                            <a
-                                key={label}
-                                href={href}
-                                aria-label={label}
-                                target="_blank"
-                                rel="noreferrer"
-                                className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/10
-                           text-emerald-200/80 hover:text-emerald-200 hover:border-emerald-500/40 transition
-                           focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400/60"
-                            >
-                                <Icon className="h-5 w-5" />
-                            </a>
-                        ))}
-                    </div>
-                </div>
+        {/* ==================================
+            BRAND + NAVIGATION + SOCIALS
+        ================================== */}
 
-                {/* Bottom row */}
-                <div className="mt-8 pt-6 border-t border-white/10 text-sm text-gray-400">
-                    <div className="grid grid-cols-1 md:grid-cols-3 items-center gap-4">
+        <div className="sr-footer-main">
 
-                        <div className="hidden md:block" />
+          {/* BRAND */}
+          <div className="sr-footer-brand">
 
-                        <span className="justify-self-center">
-                            &copy; {new Date().getFullYear()} Sadik Rahman. All rights reserved.
-                        </span>
+            <a
+              href="#home"
+              className="sr-footer-brand-name"
+            >
+              Sadik <span>Rahman.</span>
+            </a>
 
-                        <a
-                            href="#home"
-                            className="justify-self-center md:justify-self-end inline-flex items-center gap-2 text-emerald-300 hover:text-emerald-200 transition"
-                        >
-                            Return to Top &uarr;
-                        </a>
-                    </div>
-                </div>
+            <p>
+              Full-stack developer building thoughtful
+              web experiences, reliable systems, and
+              ideas worth sharing.
+            </p>
+          </div>
+
+          {/* NAVIGATION */}
+          <nav
+            className="sr-footer-navigation"
+            aria-label="Footer navigation"
+          >
+            <h3>EXPLORE</h3>
+
+            <ul>
+              {NAV_LINKS.map((link) => (
+                <li key={link.href}>
+                  <a href={link.href}>
+                    {link.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </nav>
+
+          {/* SOCIAL LINKS */}
+          <div className="sr-footer-connect">
+
+            <h3>FIND ME ONLINE</h3>
+
+            <p>
+              Code, updates, and everything in between.
+            </p>
+
+            <div className="sr-footer-socials">
+
+              {SOCIALS.map(
+                ({ label, href, Icon }) => (
+                  <a
+                    key={label}
+                    href={href}
+                    title={label}
+                    aria-label={label}
+                    {...(href.startsWith("http")
+                      ? {
+                          target: "_blank",
+                          rel: "noopener noreferrer",
+                        }
+                      : {})}
+                  >
+                    <Icon
+                      size={18}
+                      aria-hidden="true"
+                    />
+                  </a>
+                )
+              )}
 
             </div>
-        </footer>
-    );
-};
+          </div>
+        </div>
 
-export default Footer;
+        {/* ==================================
+            COPYRIGHT + RETURN TO TOP
+        ================================== */}
+
+        <div className="sr-footer-bottom">
+
+          <span>
+            © {new Date().getFullYear()} Sadik Rahman.
+            All rights reserved.
+          </span>
+
+          <span className="sr-footer-made-with">
+            Built with React, Vite and You know Who
+          </span>
+
+          <a href="#home">
+            Back to top
+
+            <FiArrowUp
+              size={15}
+              aria-hidden="true"
+            />
+          </a>
+
+        </div>
+
+        {/* LARGE DECORATIVE SIGNATURE */}
+        <div
+          className="sr-footer-wordmark"
+          aria-hidden="true"
+        >
+          SADIK RAHMAN<span>.</span>
+        </div>
+
+      </div>
+    </footer>
+  );
+}

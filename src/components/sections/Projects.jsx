@@ -1,101 +1,324 @@
-import React from "react";
-import RevealOnScroll from "../RevealOnScroll";
+
+import { FaGithub } from "react-icons/fa6";
+import {
+  FiArrowUpRight,
+  FiCode,
+  FiGitBranch,
+  FiServer,
+} from "react-icons/fi";
+
+import ProjectLinks from "../ProjectLinks";
+import ProjectVisual from "../ProjectVisual";
 import SectionHeading from "../SectionHeading";
 
-const PROJECTS = [
-    {
-        title: "Shanjeeban",
-        description:
-            "Mobile health & donor coordination app with real-time requests, push notifications, and secure auth.",
-        tech: ["Flutter", "Firebase", "Dart"],
-        href: "https://github.com/SadikRahman14/Shanjeeban",
-    },
-    {
-        title: "Vien",
-        description:
-            "MERN e-commerce/admin dashboard with role-based access, product CRUD, charts, and server-side pagination.",
-        tech: ["MongoDB", "Express.js", "React", "Node.js", "Tailwind CSS"],
-        href: "https://github.com/SadikRahman14/Vien",
-    },
-    {
-        title: "Innovest",
-        description:
-            "Investment portfolio web app: watchlists, transactions, P/L analytics, and CSV import/export.",
-        tech: ["MySQL", "Laravel", "React"],
-        href: "https://github.com/kazi-kamruddin/Innovest",
-    },
-    {
-        title: "Beacon",
-        description:
-            "Internal incident & asset tracker with audit logs, email alerts, and fine-grained permissions.",
-        tech: [".NET", "ASP.NET Core MVC", "C#"],
-        href: "https://github.com/SadikRahman14/Beacon",
-    },
-];
+import {
+  engineeringProjects,
+  featuredProjects,
+  liveProjects,
+  repositoryProjects,
+} from "../../data/projects";
 
+import "../../styles/project-showcase.css";
 
-
-function ProjectCard({ title, description, tech, href }) {
-    return (
-        <div
-            className='p-6 rounded-xl border border-white/10 hover:-translate-y-1 hover:border-green-500/30
-                  hover:shadow-[0_2px_8px_rgba(59,130,246,0.2)] transition'
-        >
-            <h3 className='text-green-200/90 text-xl font-bold mb-2'>{title}</h3>
-
-            <p className='text-green-100/90 mb-4'>{description}</p>
-
-            <div className='flex flex-wrap gap-2 mb-2'>
-                {tech.map((t, i) => (
-                    <span
-                        key={i}
-                        className='bg-green-700/30 text-green-300 py-1 px-3 rounded-full text-sm
-                       hover:bg-green-500/20 hover:shadow-[0_2px_8px_rgba(59,130,246,0.2)] transition-all'
-                    >
-                        {t}
-                    </span>
-                ))}
-            </div>
-
-            <div className='flex justify-between items-center'>
-    <a 
-        href={href} 
-        aria-label="View on GitHub"
-        className='text-green-400 hover:text-green-300 transition-colors my-4 block'
-    >
-        <svg 
-            xmlns="http://www.w3.org/2000/svg" 
-            width="24" 
-            height="24" 
-            viewBox="0 0 24 24" 
-            fill="currentColor"
-        >
-            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-        </svg>
-    </a>
-</div>
-        </div>
-    );
-}
-
-const Projects = () => {
-    return (
-        <section id='projects' className='mt-20 min-h-screen flex items-center justify-center py-20'>
-            <RevealOnScroll>
-                <div className='max-w-5xl mx-auto px-4'>
-                    <SectionHeading>Featured Projects</SectionHeading>
-
-                    <div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
-                        {PROJECTS.map((p, idx) => (
-                            <ProjectCard key={idx} {...p} />
-                        ))}
-                    </div>
-                    
-                </div>
-                
-            </RevealOnScroll>
-        </section>
-    );
+const repositoryIcons = {
+  backend: FiServer,
+  react: FiCode,
+  algorithms: FiGitBranch,
 };
 
-export default Projects;
+/* ==========================================
+   EXISTING PROJECT CARD
+========================================== */
+
+function ProjectCard({ project, featured = false }) {
+  return (
+    <article
+      className={`portfolio-work-card ${
+        featured ? "portfolio-work-card--featured" : ""
+      }`}
+    >
+      <ProjectVisual project={project} />
+
+      <div className="portfolio-work-content">
+        <div className="portfolio-card-meta">
+          <span>{project.label}</span>
+
+          {project.liveUrl ? (
+            <span className="portfolio-live-indicator">
+              <i aria-hidden="true" /> LIVE
+            </span>
+          ) : (
+            <span className="portfolio-source-indicator">
+              SOURCE AVAILABLE
+            </span>
+          )}
+        </div>
+
+        <h4>{project.title}</h4>
+
+        <p>{project.description}</p>
+
+        <div className="portfolio-card-footer">
+          <div
+            className="portfolio-tech-list"
+            aria-label={`${project.title} technologies and topics`}
+          >
+            {project.tech.map((tech) => (
+              <span key={tech}>{tech}</span>
+            ))}
+          </div>
+
+          <ProjectLinks project={project} />
+        </div>
+      </div>
+    </article>
+  );
+}
+
+/* ==========================================
+   EXISTING PROJECT COLLECTION
+========================================== */
+
+function WorkGroup({
+  number,
+  title,
+  description,
+  projects,
+  featured = false,
+}) {
+  return (
+    <div className="portfolio-work-group">
+      <div className="portfolio-work-group-header">
+        <div>
+          <div className="portfolio-work-overline">
+            <span>{number}</span> / COLLECTION
+          </div>
+
+          <h3>{title}</h3>
+          <p>{description}</p>
+        </div>
+
+        <span className="portfolio-work-count">
+          {String(projects.length).padStart(2, "0")} PROJECTS
+        </span>
+      </div>
+
+      <div
+        className={`portfolio-project-grid ${
+          featured ? "portfolio-project-grid--featured" : ""
+        }`}
+      >
+        {projects.map((project) => (
+          <ProjectCard
+            key={project.id}
+            project={project}
+            featured={featured}
+          />
+        ))}
+      </div>
+    </div>
+  );
+}
+
+/* ==========================================
+   NEW — REPOSITORY CARD
+========================================== */
+
+function RepositoryCard({ repository }) {
+  const Icon =
+    repositoryIcons[repository.visual] ?? FiCode;
+
+  return (
+    <article className="portfolio-repo-card">
+
+      <div className="portfolio-repo-top">
+        <span
+          className="portfolio-repo-icon"
+          aria-hidden="true"
+        >
+          <Icon size={23} />
+        </span>
+
+        <span className="portfolio-repo-kind">
+          {repository.label}
+        </span>
+      </div>
+
+      <h4>{repository.title}</h4>
+
+      <p>{repository.description}</p>
+
+      <div
+        className="portfolio-tech-list portfolio-repo-tech"
+        aria-label={`${repository.title} topics`}
+      >
+        {repository.tech.map((tech) => (
+          <span key={tech}>{tech}</span>
+        ))}
+      </div>
+
+      <div className="portfolio-repo-bottom">
+        {repository.githubUrl ? (
+          <a
+            href={repository.githubUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="portfolio-repo-link"
+            aria-label={`Explore ${repository.title} on GitHub`}
+          >
+            <FaGithub aria-hidden="true" />
+            <span>Explore repository</span>
+            <FiArrowUpRight aria-hidden="true" />
+          </a>
+        ) : (
+          <span className="portfolio-repo-link-pending">
+            Repository link unavailable
+          </span>
+        )}
+      </div>
+
+    </article>
+  );
+}
+
+/* ==========================================
+   NEW — REPOSITORY COLLECTION
+========================================== */
+
+function RepositoryGroup({ repositories }) {
+  return (
+    <div className="portfolio-work-group">
+
+      <div className="portfolio-work-group-header">
+        <div>
+          <div className="portfolio-work-overline">
+            <span>04</span> / COLLECTION
+          </div>
+
+          <h3>Codebases &amp; learning notes</h3>
+
+          <p>
+            Reusable reference material, documented
+            experiments, and learning-by-building
+            repositories.
+          </p>
+        </div>
+
+        <span className="portfolio-work-count">
+          {String(repositories.length).padStart(2, "0")}{" "}
+          REPOSITORIES
+        </span>
+      </div>
+
+      <div className="portfolio-repository-grid">
+        {repositories.map((repository) => (
+          <RepositoryCard
+            key={repository.id}
+            repository={repository}
+          />
+        ))}
+      </div>
+
+    </div>
+  );
+}
+
+/* ==========================================
+   PROJECTS SECTION
+========================================== */
+
+export default function Projects() {
+  const totalProjects =
+    featuredProjects.length +
+    liveProjects.length +
+    engineeringProjects.length;
+
+  const liveBuilds = [
+    ...featuredProjects,
+    ...liveProjects,
+    ...engineeringProjects,
+  ].filter((project) => Boolean(project.liveUrl)).length;
+
+  return (
+    <section
+      id="projects"
+      className="portfolio-projects-section"
+      aria-label="Selected projects"
+    >
+      <div className="portfolio-container">
+
+        <div className="portfolio-projects-heading">
+          <SectionHeading>Selected Work</SectionHeading>
+
+          <p>
+            Projects across full-stack engineering,
+            creative web experiences, mobile development,
+            and documented learning.
+          </p>
+
+          <div
+            className="portfolio-work-tally"
+            aria-label={`${totalProjects} projects, ${liveBuilds} deployed websites, ${repositoryProjects.length} repositories`}
+          >
+            <span>
+              <strong>
+                {String(totalProjects).padStart(2, "0")}
+              </strong>
+              PROJECTS
+            </span>
+
+            <span
+              className="portfolio-tally-divider"
+              aria-hidden="true"
+            />
+
+            <span>
+              <strong>
+                {String(liveBuilds).padStart(2, "0")}
+              </strong>
+              LIVE BUILDS
+            </span>
+
+            <span
+              className="portfolio-tally-divider"
+              aria-hidden="true"
+            />
+
+            <span>
+              <strong>
+                {String(repositoryProjects.length).padStart(2, "0")}
+              </strong>
+              REPOSITORIES
+            </span>
+          </div>
+        </div>
+
+        <WorkGroup
+          number="01"
+          title="Featured projects"
+          description="Full-stack products where the frontend and backend come together."
+          projects={featuredProjects}
+          featured
+        />
+
+        <WorkGroup
+          number="02"
+          title="More live projects"
+          description="Experiments, experiences, and useful tools you can try right now."
+          projects={liveProjects}
+        />
+
+        <WorkGroup
+          number="03"
+          title="Other engineering projects"
+          description="Code-focused work with source available to explore."
+          projects={engineeringProjects}
+        />
+
+        {/* After Shanjeeban and Beacon */}
+        <RepositoryGroup repositories={repositoryProjects} />
+
+      </div>
+    </section>
+  );
+}

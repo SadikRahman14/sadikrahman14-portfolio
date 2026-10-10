@@ -1,0 +1,280 @@
+
+/* ====================================
+   HIGH FIVE — DARK EMERALD
+==================================== */
+
+.sr-highfive {
+  display: flex;
+  position: relative;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+
+  gap: 22px 36px;
+
+  margin: 0 0 30px;
+  padding: 25px 28px;
+
+  border: 1px solid rgba(123, 210, 155, 0.29);
+  border-radius: 16px;
+
+  background: linear-gradient(
+    115deg,
+    rgba(30, 81, 49, 0.37),
+    rgba(11, 32, 20, 0.68)
+  );
+
+  font-family: "Outfit", sans-serif;
+}
+
+.sr-highfive-copy {
+  min-width: 0;
+  flex: 1 1 280px;
+}
+
+.sr-highfive-kicker {
+  color: #8ed3a7;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.17em;
+}
+
+.sr-highfive-copy h3 {
+  margin: 8px 0 7px;
+
+  color: #f1f9f3;
+  font-size: clamp(20px, 2.35vw, 28px);
+  font-weight: 700;
+  letter-spacing: -0.035em;
+  line-height: 1.25;
+}
+
+.sr-highfive-copy h3 span {
+  color: #83dbaa;
+}
+
+.sr-highfive-copy p {
+  margin: 0;
+  color: #9db6a5;
+  font-size: 12px;
+}
+
+/* COUNT + BUTTON */
+
+.sr-highfive-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: 22px;
+}
+
+.sr-highfive-total {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.sr-highfive-total strong {
+  color: #e7faed;
+  font-size: 31px;
+  line-height: 1;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.sr-highfive-total span {
+  color: #9aba9f;
+  font-size: 11px;
+  letter-spacing: 0.03em;
+}
+
+/* BUTTON */
+
+.sr-highfive-button {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+
+  min-height: 48px;
+  padding: 11px 18px;
+
+  border: 1px solid #8debb8;
+  border-radius: 10px;
+
+  background: #79e7ab;
+  color: #07311b;
+
+  font: 700 13px "Outfit", sans-serif;
+  white-space: nowrap;
+  cursor: pointer;
+
+  transition:
+    transform 200ms ease,
+    background 200ms ease,
+    border-color 200ms ease;
+}
+
+.sr-highfive-button:hover:not(:disabled) {
+  transform: translateY(-2px);
+  background: #abf5ca;
+}
+
+.sr-highfive-button.is-given {
+  border-color: rgba(139, 220, 169, 0.35);
+  background: rgba(64, 141, 90, 0.22);
+  color: #bceccd;
+}
+
+.sr-highfive-button:disabled {
+  cursor: default;
+  opacity: 0.77;
+}
+
+.sr-highfive-button:focus-visible {
+  outline: 2px solid #a3f5c7;
+  outline-offset: 4px;
+}
+
+/* FEEDBACK */
+
+.sr-highfive-feedback {
+  width: 100%;
+  margin: -10px 0 0;
+
+  font-size: 12px;
+  color: #9fe4b7;
+}
+
+.sr-highfive-feedback.is-error {
+  color: #f4b3a8;
+}
+
+/* MOBILE */
+
+@media (max-width: 680px) {
+  .sr-highfive {
+    padding: 21px;
+  }
+
+  .sr-highfive-actions {
+    width: 100%;
+    justify-content: space-between;
+  }
+}
+
+@media (max-width: 420px) {
+  .sr-highfive-actions {
+    gap: 15px;
+  }
+
+  .sr-highfive-button {
+    flex: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sr-highfive-button {
+    transition: none;
+  }
+}
+
+
+/* =====================================
+   HIGH FIVE — NAVBAR VARIANT
+===================================== */
+
+.sr-highfive-nav {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.sr-highfive-nav-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+
+  min-height: 37px;
+  padding: 7px 10px;
+
+  border: 1px solid rgba(116, 224, 157, 0.4);
+  border-radius: 9px;
+
+  background: rgba(30, 95, 55, 0.28);
+  color: #b7efcb;
+
+  font: 600 11px "Outfit", sans-serif;
+  white-space: nowrap;
+  cursor: pointer;
+
+  transition:
+    background 200ms ease,
+    border-color 200ms ease,
+    transform 200ms ease;
+}
+
+.sr-highfive-nav-button:hover:not(:disabled) {
+  transform: translateY(-2px);
+
+  background: rgba(52, 142, 84, 0.34);
+  border-color: #7ce7a7;
+}
+
+.sr-highfive-nav-button.is-given {
+  background: rgba(63, 134, 84, 0.16);
+  color: #90cba6;
+}
+
+.sr-highfive-nav-button:disabled {
+  cursor: default;
+  opacity: 0.75;
+}
+
+/* COUNT BADGE */
+
+.sr-highfive-nav-count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  min-width: 25px;
+  padding: 3px 6px;
+
+  border-radius: 6px;
+
+  background: rgba(110, 219, 147, 0.15);
+  color: #92e8b3;
+
+  font-size: 11px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+/* KEYBOARD ACCESSIBILITY */
+
+.sr-highfive-nav-button:focus-visible {
+  outline: 2px solid #9cf4bf;
+  outline-offset: 3px;
+}
+
+/* MOBILE / TABLET — ICON + COUNT ONLY */
+
+@media (max-width: 900px) {
+  .sr-highfive-nav-text {
+    display: none;
+  }
+
+  .sr-highfive-nav-button {
+    gap: 7px;
+    padding: 7px 9px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sr-highfive-nav-button {
+    transition: none;
+  }
+}

@@ -3,6 +3,7 @@ import { IoMdCloseCircle } from "react-icons/io";
 
 const NAV_LINKS = [
     { label: "HOME", href: "#home" },
+    { label: "LATEST", href: "#latest" },
     { label: "ABOUT", href: "#about" },
     { label: "PROJECTS", href: "#projects" },
     { label: "CONTACT", href: "#contact" },
@@ -38,7 +39,7 @@ const MobileMenu = ({ menuOpen, setMenuOpen }) => {
     return (
         <div
             // overlay
-            className={`fixed inset-0 z-40 transition-opacity duration-300 ease-out
+            className={`fixed inset-0 z-50 transition-opacity duration-300 ease-out
         ${menuOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"}
         bg-[rgba(10,10,10,0.75)] backdrop-blur-md`}
             aria-hidden={!menuOpen}
